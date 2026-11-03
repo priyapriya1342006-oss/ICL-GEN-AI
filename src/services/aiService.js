@@ -3,6 +3,8 @@
  * Passes the user's Firebase ID token for verification.
  * Private AI keys are never accessed or stored on the client.
  */
+const API_BASE_URL = import.meta.env.VITE_API_URL || ''
+
 export async function generateStoryWithAI({
   idToken,
   mode,
@@ -16,7 +18,9 @@ export async function generateStoryWithAI({
     throw new Error('Authentication required. Please sign in to generate stories with the real AI model.')
   }
 
-  const response = await fetch('/api/generate', {
+  const endpoint = `${API_BASE_URL}/api/generate`
+
+  const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

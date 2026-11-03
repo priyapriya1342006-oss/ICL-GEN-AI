@@ -7,7 +7,25 @@ const app = express()
 const PORT = process.env.PORT || 5000
 
 // Middleware
-app.use(cors())
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  process.env.CLIENT_ORIGIN,
+].filter(Boolean)
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // In development, or for tools/server requests with no origin, allow access
+      if (!origin || process.env.NODE_ENV !== 'production' || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error(`Origin ${origin} not allowed by StorySpark CORS policy`))
+      }
+    },
+    credentials: true,
+  })
+)
 app.use(express.json({ limit: '500kb' }))
 
 // Health Check Endpoint
@@ -29,7 +47,7 @@ app.use('/api/*', (req, res) => {
 })
 
 // Global Error Handler
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.error('[Server Error]:', err?.message || err)
   res.status(err.status || 500).json({
     error: err.message || 'Internal server error.',

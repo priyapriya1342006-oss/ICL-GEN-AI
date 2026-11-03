@@ -239,7 +239,7 @@ export default function DashboardPage() {
       )}
 
       {/* Main Tabs: My Stories, Favourites, Generation History */}
-      <div className="rounded-2xl bg-slate-900/60 border border-slate-800 p-6">
+      <div className="rounded-2xl bg-slate-900/60 border border-slate-800 p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-800/80 pb-4">
           {/* Tab Navigation */}
           <div className="flex flex-wrap gap-2">
@@ -452,8 +452,8 @@ export default function DashboardPage() {
 
       {/* Story Reading Modal */}
       {selectedStoryForModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 animate-fade-in">
-          <div className="max-w-2xl w-full max-h-[85vh] p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl flex flex-col relative overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-3 sm:p-4 animate-fade-in">
+          <div className="max-w-2xl w-full max-h-[90vh] p-4 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl flex flex-col relative overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between gap-3 pb-4 border-b border-slate-800">
               <div>

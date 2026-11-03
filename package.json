@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node server/index.js",
+    "server:dev": "node --watch server/index.js",
+    "test": "node --test server/test/api.test.js server/test/validation.test.js",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"

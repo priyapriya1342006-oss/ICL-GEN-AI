@@ -178,7 +178,7 @@ export default function ProfilePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Author Card & Account Summary (4 cols) */}
-        <div className="lg:col-span-4 p-6 rounded-2xl bg-slate-900/70 border border-slate-800 text-center flex flex-col items-center shadow-xl">
+        <div className="lg:col-span-4 p-4 sm:p-6 rounded-2xl bg-slate-900/70 border border-slate-800 text-center flex flex-col items-center shadow-xl">
           <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 p-1 mb-4 shadow-xl shadow-purple-500/20">
             <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center text-white text-3xl font-extrabold">
               {name ? name.charAt(0).toUpperCase() : <User className="w-10 h-10 text-purple-300" />}
@@ -240,7 +240,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Right Column: Edit Profile Form (8 cols) */}
-        <div className="lg:col-span-8 p-6 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl">
+        <div className="lg:col-span-8 p-4 sm:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-xl">
           <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-purple-400" />
             Edit Profile Details

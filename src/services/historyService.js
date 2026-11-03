@@ -19,6 +19,7 @@ export async function recordGenerationHistory({
   genre,
   language,
   tone,
+  status = 'demo',
 }) {
   if (!userId || !db) return null
 
@@ -30,7 +31,7 @@ export async function recordGenerationHistory({
       genre: genre || 'Fantasy',
       language: language || 'English',
       tone: tone || 'Inspiring',
-      status: 'demo', // Explicitly marked as demo output
+      status: status || 'demo', // Explicitly records 'success' or 'demo'
       createdAt: serverTimestamp(),
     }
 

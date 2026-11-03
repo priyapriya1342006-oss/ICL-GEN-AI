@@ -105,7 +105,8 @@ router.post('/generate', generationLimiter, verifyFirebaseToken, async (req, res
       })
     }
 
-    // 3. Call Google Gemini API
+    // 3. Call Google Gemini API with Timeout handling (30s)
+    const modelName = process.env.GEMINI_MODEL || 'gemini-3.8-flash'
     const ai = new GoogleGenAI({ apiKey })
     const fullPrompt = buildGeminiPrompt({
       mode: selectedMode,
@@ -116,10 +117,21 @@ router.post('/generate', generationLimiter, verifyFirebaseToken, async (req, res
       length: selectedLength,
     })
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+    const timeoutMs = 30000
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => {
+        const timeoutErr = new Error('AI generation request timed out after 30 seconds.')
+        timeoutErr.code = 'REQUEST_TIMEOUT'
+        reject(timeoutErr)
+      }, timeoutMs)
+    )
+
+    const apiPromise = ai.models.generateContent({
+      model: modelName,
       contents: fullPrompt,
     })
+
+    const response = await Promise.race([apiPromise, timeoutPromise])
 
     const generatedText = response.text
 
@@ -143,6 +155,13 @@ router.post('/generate', generationLimiter, verifyFirebaseToken, async (req, res
     })
   } catch (error) {
     console.error('❌ [Server Gemini Error]:', error?.message || error)
+
+    if (error?.code === 'REQUEST_TIMEOUT') {
+      return res.status(504).json({
+        error: 'The story generation request timed out. Please try again or simplify your prompt.',
+        code: 'REQUEST_TIMEOUT',
+      })
+    }
 
     const errorMessage = error?.message || ''
     if (errorMessage.includes('API_KEY_INVALID') || errorMessage.includes('403')) {

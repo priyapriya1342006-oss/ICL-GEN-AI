@@ -24,6 +24,7 @@ export async function saveStory({
   language,
   tone,
   isFavourite = false,
+  isDemo = false,
 }) {
   if (!userId) {
     throw new Error('You must be signed in to save stories.')
@@ -49,7 +50,7 @@ export async function saveStory({
     language: language || 'English',
     tone: tone || 'Inspiring',
     isFavourite: Boolean(isFavourite),
-    isDemo: true, // Clearly marks mock/preview output
+    isDemo: Boolean(isDemo), // Records true for demo output, false for real AI output
     createdAt: serverTimestamp(),
   }
 

@@ -260,6 +260,7 @@ export default function GeneratorPage() {
           genre,
           language,
           tone,
+          status: 'success',
         })
       } catch (histErr) {
         console.warn('History logging notice:', histErr?.message)
@@ -319,6 +320,7 @@ export default function GeneratorPage() {
         language,
         tone,
         isFavourite: false,
+        isDemo: !isRealAI,
       })
 
       setSaveFeedback({
@@ -372,7 +374,7 @@ export default function GeneratorPage() {
                 setSelectedMode(mode.id)
                 setValidationError('')
               }}
-              className={`p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+              className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between ${
                 isSelected
                   ? 'bg-gradient-to-br from-purple-900/40 via-slate-900 to-slate-900 border-purple-500 shadow-lg shadow-purple-500/20 scale-[1.02]'
                   : 'bg-slate-900/60 border-slate-800/80 hover:bg-slate-800/70 text-slate-300'
@@ -589,7 +591,7 @@ export default function GeneratorPage() {
         <div className="lg:col-span-7">
           <div className="min-h-[560px] rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl backdrop-blur-sm flex flex-col overflow-hidden">
             {/* Header Action Bar */}
-            <div className="px-5 py-3.5 bg-slate-900/90 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+            <div className="px-3.5 sm:px-5 py-3.5 bg-slate-900/90 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <span className={`px-2.5 py-1 rounded-full text-xs font-semibold border ${activeMode.badgeBg}`}>
                   {activeMode.name}
