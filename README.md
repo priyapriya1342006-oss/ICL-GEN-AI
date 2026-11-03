@@ -1,3 +1,11 @@
+# StorySpark AI
+
+## Live Demo
+Visit our deployed website:
+https://icl-gen-ai.onrender.com
+
+## GitHub Repository
+https://github.com/priyapriya1342006-oss/StorySpark-AI
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
